@@ -1,5 +1,5 @@
 # GCodeParser
-Ce dossier contient mon projet de programme de transformation d'instructions G-Code en langage robot KUKA
+Ce dossier contient mon projet de transformation d'instructions G-Code en langage robot KUKA
 
 ##Conditions d'utilisation du parser
 G-code (Slicer Sli3r ou Cura, Flavor Repetier) fourni en entrée
