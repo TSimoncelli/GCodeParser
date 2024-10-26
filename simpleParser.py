@@ -1,3 +1,4 @@
+
 # TODO :
 # modifier traitement du G92 pour ne pas faire de déplacement quand on envoie G92
 
@@ -66,5 +67,26 @@ def calculDirectionDepl(donnees):
         diffE = round(donnees[i][3] - donnees[i-1][3],5)
         directions.append([diffX,diffY,diffZ,diffE])
     return directions
+
+def export_commandes_robot(fichier,vecteurs,repere,vit_lin):
+    '''Genere les instructions de deplacement du robot en langage KUKA a partir de la liste des deplacements relatifs
+    fichier : chemin vers le fichier .txt dans lequel generer les commandes robot
+    vecteurs : liste des vecteurs deplacement [X,Y,Z,E]
+    repere : nom du repere pour le deplacement du robot ["/NomRepere"]
+    vit_lin : vitesse lineaire lors des translations [mm/s]
+    return : None'''
+
+    # Créé une sous liste sans les infos en E (dernière colonne)
+    xyzPos = [vect[:3] for vect in vecteurs]
+    # Ouvrir un fichier en mode écriture
+    with open(fichier, "w") as f:
+        # Parcourir chaque ligne du tableau
+        for pos in xyzPos:
+            # Si c'est un déplacement linéaire en X, Y ou Z
+            if (pos[0]!=0 or pos[1]!=0 or pos[2]!=0):
+                # Ecrit la commande robot pour les déplacements donnés dans le fichier 
+                f.write("linRel(Transformation.ofDeg(" + ",".join(map(str, pos)) + ",0.0,0.0,0.0),getApplicationData().getFrame(" + "\"" + repere + "\")).setCartVelocity(" + str(vit_lin) + ")," + "\n") 
+
+
 
 #-----------------------BOUCLE PRINCIPALE-------------------------#
