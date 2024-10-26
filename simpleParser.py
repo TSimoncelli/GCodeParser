@@ -3,6 +3,7 @@
 
 
 import re 
+import utils.utils
 
 #---------------------------VARIABLES---------------------------#
 
@@ -26,7 +27,7 @@ def extraire_donnees_fichier(fichier):
         for ligne in lignes:
             # Traduit la commande G28 = "home all axis" en une position [0,0,0]
             if ligne.startswith('G28'):
-                donnees.append([0.0,0.0,0.0,None])
+                donnees.append([0.0,0.0,0.0,lastPos[3]])
             # Vérifier si la ligne commence par G1 ou G0 = "linear move"
             elif ligne.startswith(('G1','G0','G92')):
                 # Utiliser une regex pour trouver les valeurs X,Y,Z,E
@@ -42,10 +43,11 @@ def extraire_donnees_fichier(fichier):
                     float(z.group(1)) if z else lastPos[2],
                     float(e.group(1)) if e else lastPos[3]
                 ]
-                # Vérifie que l'on a au moins une instruction de déplacement en X, Y, Z ou E (exclue les commandes Feedrate)
-                if any (val is not 0 for val in valeurs):
+                # Vérifie que l'on a au moins une instruction de déplacement différente des précédentes (exclue les commandes Feedrate)
+                if not utils.utils.listesIdentiques(valeurs, lastPos):
                     # Ajouter cette ligne de valeurs à la liste de données
                     donnees.append(valeurs)
+                    lastPos = valeurs
 
     return donnees
 
