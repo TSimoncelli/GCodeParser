@@ -1,6 +1,8 @@
+# TODO :
+# modifier traitement du G92 pour ne pas faire de déplacement quand on envoie G92
+
 
 import re 
-
 
 #---------------------------VARIABLES---------------------------#
 
@@ -9,9 +11,10 @@ import re
 #---------------------------FONCTIONS---------------------------#
 
 def extraire_donnees_fichier(fichier):
-    ''' Parcourt le fichier donné et récupère les valeurs des positions X,Y,Z des commandes G0 ou G1
+    ''' Parcourt le fichier donne et recupere les valeurs des positions X,Y,Z et celle de l'extrudeur E
+    Commandes traitees : G0,G1,G28,G92
     fichier : chemin relatif vers le fichier contenant le gcode
-    return : liste des positions successives [X,Y,Z], éléments = None si pas de déplacement dans une direction'''
+    return : liste des positions successives [X,Y,Z], elements = None si pas de deplacement dans une direction'''
 
     donnees = []
     # Ouvrir le fichier pour la lecture
@@ -22,21 +25,23 @@ def extraire_donnees_fichier(fichier):
         for ligne in lignes:
             # Traduit la commande G28 = "home all axis" en une position [0,0,0]
             if ligne.startswith('G28'):
-                donnees.append([0.0,0.0,0.0])
-            # Vérifier si la ligne commence par G1 = "linear move"
-            if ligne.startswith('G1' or 'G0'):
-                # Utiliser une regex pour trouver les valeurs X=, Y= et Z=
+                donnees.append([0.0,0.0,0.0,None])
+            # Vérifier si la ligne commence par G1 ou G0 = "linear move"
+            elif ligne.startswith(('G1','G0','G92')):
+                # Utiliser une regex pour trouver les valeurs X,Y,Z,E
                 x = re.search(r'X([-\d.]+)', ligne)
                 y = re.search(r'Y([-\d.]+)', ligne)
                 z = re.search(r'Z([-\d.]+)', ligne)
+                e = re.search(r'E([-\d.]+)', ligne)
 
                 # Extraire les valeurs et les mettre dans une liste, mettre None si une valeur est manquante
                 valeurs = [
                     float(x.group(1)) if x else None,
                     float(y.group(1)) if y else None,
-                    float(z.group(1)) if z else None
+                    float(z.group(1)) if z else None,
+                    float(e.group(1)) if e else None
                 ]
-                # Vérifie que l'on a au moins une instruction de déplacement en X, Y ou Z (exclue les commandes Feedrate)
+                # Vérifie que l'on a au moins une instruction de déplacement en X, Y, Z ou E (exclue les commandes Feedrate)
                 if any (val is not None for val in valeurs):
                     # Ajouter cette ligne de valeurs à la liste de données
                     donnees.append(valeurs)
@@ -45,9 +50,9 @@ def extraire_donnees_fichier(fichier):
 
 
 def calculDirectionDepl(donnees):
-    '''Création du vecteur contenant les valeurs de déplacement en X,Y,Z entre 2 positions
+    '''Creation du vecteur contenant les valeurs de deplacement en X,Y,Z entre 2 positions
     donnees : liste des positions absolues [X,Y,Z]
-    return : liste des déplacement relatifs [X,Y,Z] '''
+    return : liste des deplacement relatifs [X,Y,Z] '''
 
     directions = []
     for i in range (1,len(donnees)):
