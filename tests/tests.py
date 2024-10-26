@@ -4,11 +4,11 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'utils')))
-from simpleParser import extraire_donnees_fichier
+from simpleParser import extraire_donnees_fichier, calculDirectionDepl
 from utils.utils import listesIdentiques
 
 
-#Test 1 : l'extraction fonctionne bien comme demandé avec le gcode généré par Cura et Slic3r
+#Test 1 : Méthode extraire donnees : l'extraction fonctionne bien comme demandé avec le gcode généré par Cura et Slic3r
 file = "inputs\\pyramide1_Slic3r_FlavorRepetier_RamsaiParameters.gcode"
 output = extraire_donnees_fichier(file)
 for ligne in output:
@@ -21,3 +21,11 @@ for ligne in output:
 # liste3 = [0,2,5,0,8]
 # print(listesIdentiques(liste1,liste2))
 # print(listesIdentiques(liste2,liste3))
+
+#Test 3 : Méthode calculDirectionDepl : 
+file = "inputs\\pyramide1_Cura_FlavorRepetier_RamsaiParameters.gcode"
+output = extraire_donnees_fichier(file)
+deplacement = calculDirectionDepl(output)
+
+for ligne in deplacement:
+    print(ligne)

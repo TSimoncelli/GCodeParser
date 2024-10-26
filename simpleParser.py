@@ -59,26 +59,12 @@ def calculDirectionDepl(donnees):
 
     directions = []
     for i in range (1,len(donnees)):
-            # Calculer les différences si la ligne contient X ou Y ou Z
-            if donnees[i][0] is not None or donnees[i][1] is not None or donnees[i][2] is not None:
-                # Si pas de position précédente, on remonte en arrière jusqu'à la dernière position connue
-                gobackX, gobackY, gobackZ = 0
-                # Parcourir la liste à l'envers
-                for i in range(len(donnees) - 1, -1, -1):
-                    if donnees[i][0] is not None:
-                        posLastX = i #indice de la dernière position non vide en X
-                    if donnees[i][1] is not None:
-                        posLastY = i #indice de la dernière position non vide en Y
-                    if donnees[i][2] is not None:
-                        posLastZ = i #indice de la dernière position non vide en Z
-                    if (posLastX!=0 and posLastY!=0 and posLastZ!=0):
-                        break  # Arrêter la boucle dès que la dernière valeur non vide est trouvée pour chaque coordonnées
-                
-                # Si on a une position précédente X,Y,Z, on calcule la différence (arrondie à 5 décimales)
-                diffX = round(donnees[i][0] - donnees[posLastX][0],5)
-                diffY = round(donnees[i][1] - donnees[posLastY][1],5)
-                diffZ = round(donnees[i][1] - donnees[posLastZ][1],5)
-                directions.append([diffX,diffY,0])
+        # Calcule les déplacements relatifs dans chaque direction (arrondis à 5 digits)
+        diffX = round(donnees[i][0] - donnees[i-1][0],5)
+        diffY = round(donnees[i][1] - donnees[i-1][1],5)
+        diffZ = round(donnees[i][2] - donnees[i-1][2],5)
+        diffE = round(donnees[i][3] - donnees[i-1][3],5)
+        directions.append([diffX,diffY,diffZ,diffE])
     return directions
 
 #-----------------------BOUCLE PRINCIPALE-------------------------#
