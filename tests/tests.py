@@ -9,7 +9,7 @@ from matplotlib.animation import FuncAnimation
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'utils')))
-from simpleParser import extraire_donnees_fichier, calculDirectionDepl, export_commandes_robot
+from simpleParser import extraire_donnees_fichier, calculDirectionDepl, export_commandes_robot, runConsole
 from utils.utils import listesIdentiques
 
 
@@ -95,13 +95,25 @@ from utils.utils import listesIdentiques
 
 
  #Test 5 : fonction export commandes robot
-inFile = "inputs\\pyramide1_Cura_FlavorRepetier_RamsaiParameters.gcode"
+# inFile = "inputs\\pyramide1_Cura_FlavorRepetier_RamsaiParameters.gcode"
+# outFile = "outputs\\commandesRobot.txt"
+# repere = "/RPlateau"
+# vitesse = 7
+# output = extraire_donnees_fichier(inFile)
+# deplacements = calculDirectionDepl(output)
+# export_commandes_robot(outFile,deplacements,repere,vitesse)
+
+# for ligne in deplacements:
+#     print(ligne)       
+
+#Test 6 : interface dans la console
+# inFile = "inputs\\pyramide1_Cura_FlavorRepetier_RamsaiParameters.gcode"
+# outFile = "outputs\\commandesRobot.txt"
+# repere = "/RPlateau"
+# runConsole(inFile,outFile,repere)
+
+#Test 7 : interface + recuperation liste de fichiers dans un dossier + selection d'un fichier
+inFolder = "inputs"
 outFile = "outputs\\commandesRobot.txt"
 repere = "/RPlateau"
-vitesse = 7
-output = extraire_donnees_fichier(inFile)
-deplacements = calculDirectionDepl(output)
-export_commandes_robot(outFile,deplacements,repere,vitesse)
-
-for ligne in deplacements:
-    print(ligne)       
+runConsole(inFolder,outFile,repere)

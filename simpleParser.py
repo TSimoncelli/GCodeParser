@@ -87,6 +87,37 @@ def export_commandes_robot(fichier,vecteurs,repere,vit_lin):
                 # Ecrit la commande robot pour les déplacements donnés dans le fichier 
                 f.write("linRel(Transformation.ofDeg(" + ",".join(map(str, pos)) + ",0.0,0.0,0.0),getApplicationData().getFrame(" + "\"" + repere + "\")).setCartVelocity(" + str(vit_lin) + ")," + "\n") 
 
+def choixFichierEntree(liste):
+    ''' Fonction qui permet la selection d'un fichier parmi une liste de noms de fichiers dans le terminal
+    liste : liste des noms de fichiers parmi lesquels selectionner
+    return : fichier selectionne par l'utilisateur'''
+    print("\nSelectionnez le fichier a convertir parmi :")
+    for f in liste:
+        print(f + " ; ")
+    try:
+        # Tente de convertir en entier la saisie utilisateur
+        index = int(input("\nIndex du fichier a selectionner dans la liste (0-"+str(len(liste)-1)+"): "))
+    except ValueError:
+        print("\nErreur : veuillez entrer un nombre entier valide.")
+    return liste[index]
+
+def runConsole(inFolder,outFile,repere):
+    ''' Fonction prenant en charge la configuration du parser de g-code via un terminal'''
+    print("Convertisseur de G-code en code robot KUKA")
+    # Récupère et laisse l'utilisateur sélectionner le fichier d'entrée de son choix
+    listeFichier = utils.utils.getFilesIn(inFolder)
+    inFile = inFolder + "\\" + choixFichierEntree(listeFichier)
+    print("fichier gcode entree = " + inFile)
+    # Affiche les différents paramètres du parser de G-Code
+    print("fichier commandes robot KUKA sortie = " + outFile)
+    print("\ndeplacements robot dans repere = " + repere)
+    vitesse = input("Entrez vitesse max. de deplacement [mm/s] :")
+    print("Vitesse max. de deplacement = " + vitesse + "mm/s")
+    # Effectue la conversion
+    output = extraire_donnees_fichier(inFile)
+    deplacements = calculDirectionDepl(output)
+    export_commandes_robot(outFile,deplacements,repere,vitesse)
+    print("\n Conversion terminee, resultat disponible dans " + outFile)
 
 
 #-----------------------BOUCLE PRINCIPALE-------------------------#
