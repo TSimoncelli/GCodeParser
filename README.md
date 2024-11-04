@@ -17,7 +17,6 @@ Conversion d’instructions G-code de déplacement obtenues à partir d’un tra
 * * G0: Rapid move
   * G1: Controlled linear move
   * G28: Home
-  * G92: Set User Position (no movement)
 
 ![image](https://github.com/user-attachments/assets/0f4c26b3-537d-4ec1-a1d4-88c75022dda9)
 Exemple de conversion d'un fichier G-code en liste d'instructions pour robot KUKA
