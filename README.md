@@ -25,3 +25,16 @@ Etapes de conversion du g-code en code robot KUKA
 Exemple de conversion d'un fichier G-code en liste d'instructions pour robot KUKA
 
 ## Tutoriel d'utilisation du convertisseur
+### 1) Télécharger le projet en zip ou cloner le projet Github directement dans un IDE
+### 2) Ouvrir le projet dans un IDE permettant d'exécuter du code Python
+### 3) Lancer le programme SimpleParser.py
+### 4) Un écran de terminal s'ouvre et demande de choisir un fichier gcode parmi ceux présents dans le dossier inputs, entrer le chiffre correspondant à l'index du fichier à selectionner dans la liste des fichiers affichés
+![image](https://github.com/user-attachments/assets/0c0bb1b4-fef4-4761-b092-e69fc9a791eb)
+5) La localisation du fichier gcode d'entrée et du fichier de commandes robot de sortie s'affichent dans la console
+6) Entrer la vitesse de déplacement maximum en mm/s pour les déplacements du robot (Vitesse précisée lors de l'exécution d'un déplacement avec la commande linRel en langage robot KUKA)
+![image](https://github.com/user-attachments/assets/26becf26-e6f1-4853-9031-d27a5d86f6fb)
+7) La conversion s'exécute et le résultat est disponible dans un fichier texte dans le répertoire outputs
+![image](https://github.com/user-attachments/assets/910cedaa-f9b5-41f3-9dde-579ea26a14d1)
+
+
+
