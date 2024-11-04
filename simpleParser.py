@@ -1,6 +1,6 @@
 
 # TODO :
-# modifier traitement du G92 pour ne pas faire de déplacement quand on envoie G92
+# 
 
 
 import re 
@@ -14,7 +14,7 @@ import utils.utils
 
 def extraire_donnees_fichier(fichier):
     ''' Parcourt le fichier donne et recupere les valeurs des positions X,Y,Z et celle de l'extrudeur E
-    Commandes traitees : G0,G1,G28,G92
+    Commandes traitees : G0,G1,G28
     fichier : chemin relatif vers le fichier contenant le gcode
     return : liste des positions successives [X,Y,Z], elements = None si pas de deplacement dans une direction'''
 
@@ -30,7 +30,7 @@ def extraire_donnees_fichier(fichier):
             if ligne.startswith('G28'):
                 donnees.append([0.0,0.0,0.0,lastPos[3]])
             # Vérifier si la ligne commence par G1 ou G0 = "linear move"
-            elif ligne.startswith(('G1','G0','G92')):
+            elif ligne.startswith(('G1','G0')):
                 # Utiliser une regex pour trouver les valeurs X,Y,Z,E
                 x = re.search(r'X([-\d.]+)', ligne)
                 y = re.search(r'Y([-\d.]+)', ligne)
