@@ -2,7 +2,7 @@
 Ce projet contient un convertisseur d'instructions G-Code en langage robot KUKA
 
 ## Utilisation
-Conversion d’instructions G-code de déplacement obtenues à partir d’un trancheur en commandes de déplacement relatif du robot KUKA dans un repère spécifique. Ce convertisseur ne prend pas en compte l’orientation de la buse et n’effectue donc aucune rotation de l’outil depuis sa pose de départ. 
+Conversion d’instructions G-code de déplacement obtenues à partir d’un trancheur en commandes de déplacement relatif du robot KUKA dans un repère spécifique. Ce convertisseur ne prend pas en compte l’orientation de l'outil et n’effectue donc aucune rotation de l’outil depuis sa pose de départ. 
 ## Configuration
 * G-code (Slicer Sli3r ou Cura, Flavor Repetier) fourni en entrée
 * Génération de commandes linRel du robot dans un fichier txt en sortie, pour être ensuite copié-collé dans un MotionBatch (dans l’environnement de programmation KUKA Sunrise)
