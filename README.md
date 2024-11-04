@@ -11,7 +11,7 @@ Conversion d’instructions G-code de déplacement obtenues à partir d’un tra
 ## Suppositions : 
 * Que le slicer utilisé a été correctement configuré avec les paramètres souhaités (diamètre de buse, hauteur de ligne, type de remplissage, position de la pièce dans le repère)
 * Que le robot est à l'origine du repère plateau avec la buse orientée à la verticale pour démarrer la séquence de commandes
-* Que les instructions de déplacement sont envoyées avec G0 ou G1 dans le G-code
+* Que les instructions de déplacement sont envoyées avec G0, G1 ou G28 dans le G-code
 * Que les mouvements à effectuer sont dans le repère plateau
 * Les instructions contenues dans le G-code autres que les déplacements en X,Y,Z sont ignorés lors de la génération du fichier de sortie
 
