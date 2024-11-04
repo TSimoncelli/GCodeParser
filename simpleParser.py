@@ -8,7 +8,9 @@ import utils.utils
 
 #---------------------------VARIABLES---------------------------#
 
-
+inFolder = "inputs"
+outFile = "outputs\\commandesRobot.txt"
+repere = "/RPlateau"
 
 #---------------------------FONCTIONS---------------------------#
 
@@ -121,3 +123,5 @@ def runConsole(inFolder,outFile,repere):
 
 
 #-----------------------BOUCLE PRINCIPALE-------------------------#
+
+runConsole(inFolder,outFile,repere)

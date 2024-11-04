@@ -113,7 +113,7 @@ from utils.utils import listesIdentiques
 # runConsole(inFile,outFile,repere)
 
 #Test 7 : interface + recuperation liste de fichiers dans un dossier + selection d'un fichier
-inFolder = "inputs"
-outFile = "outputs\\commandesRobot.txt"
-repere = "/RPlateau"
-runConsole(inFolder,outFile,repere)
+# inFolder = "inputs"
+# outFile = "outputs\\commandesRobot.txt"
+# repere = "/RPlateau"
+# runConsole(inFolder,outFile,repere)
