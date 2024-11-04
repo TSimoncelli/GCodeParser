@@ -20,3 +20,7 @@ Conversion d’instructions G-code de déplacement obtenues à partir d’un tra
 
 ![image](https://github.com/user-attachments/assets/0f4c26b3-537d-4ec1-a1d4-88c75022dda9)
 Exemple de conversion d'un fichier G-code en liste d'instructions pour robot KUKA
+
+![fonctionnementPasserelleSimpleParser](https://github.com/user-attachments/assets/2dcb8400-b1c9-4f51-b4f0-a564803338fa)
+Etapes de conversion du g-code en code robot KUKA
+
